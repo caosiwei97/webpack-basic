@@ -1,0 +1,4 @@
+h2 {
+  display: grid;
+  transition: all 0.2s;
+}

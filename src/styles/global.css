@@ -1,0 +1,6 @@
+@import './title.css';
+
+body {
+  background: orange;
+  background-image: url('../img/bg.png');
+}

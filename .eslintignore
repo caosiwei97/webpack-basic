@@ -1,0 +1,12 @@
+*.sh
+.vscode
+.idea
+.husky
+.local
+
+*.js
+/public
+/dist
+/config
+/dll
+/lib
