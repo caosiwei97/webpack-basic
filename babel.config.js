@@ -8,6 +8,11 @@ module.exports = {
         modules: false
       }
     ],
-    ['@babel/preset-typescript']
+    [
+      '@babel/preset-typescript',
+      {
+        allExtensions: true // 支持所有文件扩展名
+      }
+    ]
   ]
 }

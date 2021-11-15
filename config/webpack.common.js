@@ -5,10 +5,11 @@ const { OUTPUT_PATH, PUBLIC_PATH, resolvePath, WORK_PATH } = require('./utils')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const isProd = process.env.NODE_ENV === 'production'
+const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = {
   entry: {
-    main: './src/main.ts'
+    app: './src/entry-vue.ts'
   },
   output: {
     filename: 'js/[name].bundle.[fullhash:8].js',
@@ -20,6 +21,10 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.vue$/,
+        use: ['vue-loader']
+      },
       {
         test: /\.css$/,
         use: [
@@ -86,7 +91,9 @@ module.exports = {
       template: path.join(PUBLIC_PATH, 'index.html')
     }),
     new DefinePlugin({
-      BASE_URL: JSON.stringify('')
+      BASE_URL: JSON.stringify(''),
+      __VUE_OPTIONS_API__: false,
+      __VUE_PROD_DEVTOOLS__: false
     }),
     new DllReferencePlugin({
       context: WORK_PATH,
@@ -95,9 +102,7 @@ module.exports = {
     new AddAssetHtmlPlugin({
       outputPath: 'auto',
       filepath: resolvePath('dll/dll_lodash.js')
-    })
+    }),
+    new VueLoaderPlugin()
   ]
-  // externals: {
-  //   'lodash-es': '_',
-  // },
 }
