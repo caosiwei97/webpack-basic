@@ -5,7 +5,9 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+// const smp = new SpeedMeasurePlugin()
 
 module.exports = merge(baseConfig, {
   mode: 'production',
@@ -44,7 +46,7 @@ module.exports = merge(baseConfig, {
     new MiniCssExtractPlugin({
       filename: 'css/[name].[fullhash:6].css'
     }),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -54,6 +56,7 @@ module.exports = merge(baseConfig, {
           }
         }
       ]
-    })
+    }),
+    new BundleAnalyzerPlugin({ analyzerPort: 8081 })
   ]
 })

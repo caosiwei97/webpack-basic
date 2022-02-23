@@ -6,6 +6,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 const isProd = process.env.NODE_ENV === 'production'
 const { VueLoaderPlugin } = require('vue-loader')
+const Components = require('unplugin-vue-components/webpack')
+const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 
 module.exports = {
   entry: {
@@ -103,6 +105,9 @@ module.exports = {
       outputPath: 'auto',
       filepath: resolvePath('dll/dll_lodash.js')
     }),
-    new VueLoaderPlugin()
+    new VueLoaderPlugin(),
+    Components({
+      resolvers: [ElementPlusResolver()]
+    })
   ]
 }
